@@ -1,0 +1,16 @@
+{
+  "name": "akmaljon/bee-jee",
+  "authors": [
+    {
+      "name": "Akmaljon",
+      "email": "akmaljon.gafforov@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr4": {
+      "Fogersp\\SuperProject\\": "app"
+    }
+  },
+  "require": {},
+  "require-dev": {}
+}
