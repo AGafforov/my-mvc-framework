@@ -20,6 +20,11 @@ class App
     private static $request;
 
     /**
+     * @var $session
+     */
+    private static $session;
+
+    /**
      * @var $connection Connection
      */
     private static $connection;
@@ -39,16 +44,26 @@ class App
                 throw new \Exception("Connection to db is failed.");
             }
 
+            // Session
+            self::$session = new Session();
+
             // Request
             self::$request = new Request();
 
             // Execute requested controller
             self::$router = new Router($request, $config);
             self::$router->route();
-
         } catch (\Exception $exception) {
             print_r($exception);
         }
+    }
+
+    /**
+     * @return Router
+     */
+    public static function getRouter()
+    {
+        return self::$router;
     }
 
     /**
@@ -60,11 +75,11 @@ class App
     }
 
     /**
-     * @return Router
+     * @return mixed
      */
-    public static function getRouter()
+    public static function getSession()
     {
-        return self::$router;
+        return self::$session;
     }
 
     /**
