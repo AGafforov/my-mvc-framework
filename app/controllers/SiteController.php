@@ -12,15 +12,33 @@ use app\libraries\Controller;
  */
 class SiteController extends Controller
 {
+    /**
+     * @return mixed
+     */
     public function actionLogIn()
     {
-        $post = App::getRequest()->post();
-
-        if (($post['login'] ?? '') === "admin" && ($post['password'] ?? '') === "123") {
+        if (App::getSession()->get("isLogin")) {
+            return App::getRouter()->route("task", "index");
         }
+
+        if (App::getRequest()->post("login") === "admin" && App::getRequest()->post("password") === "123") {
+            App::getSession()->set("isLogin", true);
+
+            return App::getRouter()->route("task", "index");
+        }
+
+        return $this->render("log-in");
     }
 
+    /**
+     * @return mixed
+     */
     public function actionLogOut()
     {
+        if (App::getSession()->get("isLogin")) {
+            App::getSession()->set("isLogin", false);
+        }
+
+        return App::getRouter()->route("task", "index");
     }
 }

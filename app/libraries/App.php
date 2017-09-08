@@ -75,7 +75,7 @@ class App
     }
 
     /**
-     * @return mixed
+     * @return Session
      */
     public static function getSession()
     {
