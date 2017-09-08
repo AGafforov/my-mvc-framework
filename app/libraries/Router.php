@@ -41,19 +41,12 @@ class Router
     }
 
     /**
-     *  Routes to given controller
-     *
-     * @param null   $controller
-     * @param string $action
+     * Routes to given controller
      *
      * @return mixed
      */
-    public function route($controller = null, $action = 'index')
+    public function route()
     {
-        if ($controller) {
-            return header("Location: /index.php?route=$controller/$action");
-        }
-
         $controllerName      = $this->route[0] ?? '';
         $controllerNamespace = $this->getControllerNamespace($controllerName);
 
@@ -61,6 +54,17 @@ class Router
         $controller = new $controllerNamespace;
 
         return call_user_func(array($controller, $actionName));
+    }
+
+    /**
+     * Redirects to given controller's action
+     *
+     * @param        $controller
+     * @param string $action
+     */
+    public function to($controller, $action = "index")
+    {
+        return header("Location: /index.php?route=$controller/$action");
     }
 
     /**

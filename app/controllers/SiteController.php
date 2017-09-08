@@ -18,13 +18,13 @@ class SiteController extends Controller
     public function actionLogIn()
     {
         if (App::getSession()->get("isLogin")) {
-            return App::getRouter()->route("task", "index");
+            return App::getRouter()->to("task", "index");
         }
 
         if (App::getRequest()->post("login") === "admin" && App::getRequest()->post("password") === "123") {
             App::getSession()->set("isLogin", true);
 
-            return App::getRouter()->route("task", "index");
+            return App::getRouter()->to("task", "index");
         }
 
         return $this->render("log-in");
@@ -39,6 +39,6 @@ class SiteController extends Controller
             App::getSession()->set("isLogin", false);
         }
 
-        return App::getRouter()->route("task", "index");
+        return App::getRouter()->to("task", "index");
     }
 }
