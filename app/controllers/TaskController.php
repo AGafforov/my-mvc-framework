@@ -1,9 +1,9 @@
 <?php
 namespace app\controllers;
 
+use app\models\Task;
 use app\libraries\App;
 use app\libraries\Controller;
-use app\models\Task;
 
 /**
  * Class TaskController
@@ -44,9 +44,30 @@ class TaskController extends Controller
             $model = new Task();
             $model->insert($post);
 
-            return App::getRouter()->route('task');
+            return App::getRouter()->to('task');
         }
 
         return $this->render('add');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function actionEdit()
+    {
+        if (App::getRequest()->post()) {
+            $model = new Task();
+            $model->update(
+                App::getRequest()->post(),
+                ['id' => App::getRequest()->post('id')]
+            );
+
+            return App::getRouter()->to('task');
+        }
+
+        $id   = App::getRequest()->get('id');
+        $task = (new  Task())->selectOne($id);
+
+        return $this->render('edit', ['task' => $task]);
     }
 }
