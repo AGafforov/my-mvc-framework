@@ -76,7 +76,7 @@ class Router
             return "actionIndex";
         }
 
-        $action[0] = strtoupper($action[0]);
+        $action = str_replace(' ', '', ucwords(str_replace('-', ' ', $action)));
 
         return "action" . $action;
     }
