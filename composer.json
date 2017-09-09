@@ -11,6 +11,8 @@
       "Fogersp\\SuperProject\\": "app"
     }
   },
-  "require": {},
+  "require": {
+    "soutlink/wideimage": "*"
+  },
   "require-dev": {}
 }
