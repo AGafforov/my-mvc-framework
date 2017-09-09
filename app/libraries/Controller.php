@@ -11,6 +11,8 @@ class Controller
 {
     const VIEWS_PATH = "app\\views\\";
 
+    const LAYOUT_URL = "app\\views\\layout\\main.php";
+
     /**
      *  Renders view
      *
@@ -37,10 +39,16 @@ class Controller
      */
     private function renderView($viewPath, $params)
     {
+        // renders view
         extract($params);
-
         ob_start();
         include $viewPath;
+        $content = ob_get_clean();
+
+        // renders layout
+        extract(['content' => $content]);
+        ob_start();
+        include self::LAYOUT_URL;
         $renderedView = ob_get_clean();
 
         return $renderedView;

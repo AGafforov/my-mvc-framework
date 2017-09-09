@@ -7,16 +7,13 @@
 $isLogin = \app\libraries\App::getSession()->get("isLogin");
 ?>
 
-<?php if ($isLogin) : ?>
-    <a href="#">Админ</a>
-    <a href="index.php?route=site/log-out">Выход</a>
-<?php else: ?>
-    <a href="index.php?route=site/log-in">Вход</a>
-<?php endif; ?>
+<a href="/index.php?route=task/add" class="btn btn-primary" role="button">Добавить новую задачу</a>
+
+<h1>Список задач</h1>
 
 
 <?php if (count($tasks)) : ?>
-    <table>
+    <table class="table table-striped">
         <tr>
             <th>ID</th>
             <th>Имя</th>
@@ -36,15 +33,24 @@ $isLogin = \app\libraries\App::getSession()->get("isLogin");
             </tr>
         <?php endforeach; ?>
     </table>
-    <div>
-        <a href="<?= $prevPage === '#' ? $prevPage : "/index.php?route=task/index&page=$prevPage" ?>">Пред.</a>
-        <a href="/index.php?route=task/index&page=<?= $currentPage ?>"><?= $currentPage ?></a>
-        <a href="<?= $nextPage === '#' ? $nextPage : "/index.php?route=task/index&page=$nextPage" ?>">След.</a>
-    </div>
+
+    <ul class="pagination">
+        <li>
+            <a href="<?= $prevPage === '#' ? $prevPage : "/index.php?route=task/index&page=$prevPage" ?>">
+                Пред.
+            </a>
+        </li>
+        <li class="active">
+            <a href="/index.php?route=task/index&page=<?= $currentPage ?>">
+                <?= $currentPage ?>
+            </a>
+        </li>
+        <li>
+            <a href="<?= $nextPage === '#' ? $nextPage : "/index.php?route=task/index&page=$nextPage" ?>">
+                След.
+            </a>
+        </li>
+    </ul>
 <?php else: ?>
     <h1>Задач не найдено.</h1>
 <?php endif; ?>
-
-<a href="/index.php?route=task/add">Добавить задачу</a>
-
-
