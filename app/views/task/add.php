@@ -7,7 +7,10 @@
 
         <div class="form-group">
             <label for="username">Пользователь:</label>
-            <input id="username" type="text" name="username" class="form-control" required/>
+            <input id="username"
+                   type="text"
+                   name="username"
+                   class="form-control" required/>
         </div>
 
         <div class="form-group">
@@ -22,9 +25,81 @@
 
         <div class="form-group">
             <label>Контент:</label>
-            <textarea name="content" required class="form-control"></textarea>
+            <textarea name="content" required class="form-control" id="content"></textarea>
         </div>
 
         <button type="submit" class="btn btn-primary">Создать задачу</button>
+        <button id="preview-btn"
+                type="button"
+                class="btn btn-info"
+                data-toggle="modal"
+                data-target="#classModal">
+            Предварительный просмотр
+        </button>
     </form>
 </div>
+
+<div id="classModal"
+     class="modal fade bs-example-modal-lg"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="classInfo"
+     aria-hidden="true">
+
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+                <h4 class="modal-title" id="classModalLabel">
+                    Предварительный просмотр
+                </h4>
+            </div>
+            <div class="modal-body">
+                <table id="classTable" class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Пользователь</th>
+                        <th>E-mail</th>
+                        <th>Контент</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td id="pr-username"></td>
+                        <td id="pr-email"></td>
+                        <td id="pr-content"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">
+                    Закрыть
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        /**
+         * Handle for preview event
+         */
+        function onPreview() {
+            var email = $("#email").val();
+            var content = $("#content").val();
+            var username = $("#username").val();
+
+            $("#pr-email").html(email);
+            $("#pr-content").html(content);
+            $("#pr-username").html(username);
+
+            console.log(email, content, username);
+        }
+
+        $("#preview-btn").on('click', onPreview);
+    });
+</script>
