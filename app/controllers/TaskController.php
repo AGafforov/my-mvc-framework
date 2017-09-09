@@ -3,6 +3,7 @@ namespace app\controllers;
 
 use app\models\Task;
 use app\libraries\App;
+use app\helpers\ImageHelper;
 use app\libraries\Controller;
 
 /**
@@ -41,6 +42,8 @@ class TaskController extends Controller
     {
         $post = App::getRequest()->post();
         if ($post) {
+            $post['image'] = ImageHelper::uploadImage($_FILES['image']);
+
             $model = new Task();
             $model->insert($post);
 
