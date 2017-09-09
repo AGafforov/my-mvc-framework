@@ -56,9 +56,12 @@ class TaskController extends Controller
     public function actionEdit()
     {
         if (App::getRequest()->post()) {
+            $post           = App::getRequest()->post();
+            $post['status'] = ($post['status'] ?? '') === "on" ? 1 : 0;
+
             $model = new Task();
             $model->update(
-                App::getRequest()->post(),
+                $post,
                 ['id' => App::getRequest()->post('id')]
             );
 

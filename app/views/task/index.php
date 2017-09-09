@@ -22,6 +22,7 @@ $isLogin = \app\libraries\App::getSession()->get("isLogin");
             <th>Имя</th>
             <th>Email</th>
             <th>Контент</th>
+            <th>Выполнено</th>
             <?= $isLogin ? "<th>Редактировать</th>" : "" ?>
         </tr>
         <?php foreach ($tasks as $task) : ?>
@@ -30,6 +31,7 @@ $isLogin = \app\libraries\App::getSession()->get("isLogin");
                 <td><?= $task['username'] ?></td>
                 <td><?= $task['email'] ?></td>
                 <td><?= $task['content'] ?></td>
+                <td><?= $task['status'] == 1 ? 'да' : 'нет'; ?></td>
                 <?= $isLogin ? "<th><a href='index.php?route=task/edit&id=" . $task['id'] . "' >Изменить</a></th>" : "" ?>
             </tr>
         <?php endforeach; ?>
