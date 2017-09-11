@@ -8,7 +8,7 @@
 
 $sort        = $sort === 'ASC' ? 'DESC' : 'ASC';
 $isLogin     = \app\libraries\App::getSession()->get("isLogin");
-$currentLink = "index.php?route=task/index&page=<?= $currentPage ?>";
+$currentLink = "index.php?route=task/index&page=$currentPage";
 ?>
 
 <a href="/index.php?route=task/add" class="btn btn-primary" role="button">Добавить новую задачу</a>
