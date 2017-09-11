@@ -6,8 +6,9 @@
 /** @var $sort string */
 /** @var $sortField string */
 
-$sort    = $sort === 'ASC' ? 'DESC' : 'ASC';
-$isLogin = \app\libraries\App::getSession()->get("isLogin");
+$sort        = $sort === 'ASC' ? 'DESC' : 'ASC';
+$isLogin     = \app\libraries\App::getSession()->get("isLogin");
+$currentLink = "index.php?route=task/index&page=<?= $currentPage ?>";
 ?>
 
 <a href="/index.php?route=task/add" class="btn btn-primary" role="button">Добавить новую задачу</a>
@@ -19,23 +20,23 @@ $isLogin = \app\libraries\App::getSession()->get("isLogin");
     <table class="table table-striped">
         <tr>
             <th>
-                <a href="index.php?route=task/index&sortField=id&sort=<?= $sort ?>">ID</a>
+                <a href="<?= $currentLink ?>&sortField=id&sort=<?= $sort ?>">ID</a>
                 <?= $sortField === 'id' ? '<i class="fa fa-fw fa-sort">' : ""; ?>
             </th>
             <th>
-                <a href="index.php?route=task/index&sortField=username&sort=<?= $sort; ?>">Имя</a>
+                <a href="<?= $currentLink ?>&sortField=username&sort=<?= $sort; ?>">Имя</a>
                 <?= $sortField === 'username' ? '<i class="fa fa-fw fa-sort">' : ""; ?>
             </th>
             <th>
-                <a href="index.php?route=task/index&sortField=email&sort=<?= $sort; ?>">Email</a>
+                <a href="<?= $currentLink ?>&sortField=email&sort=<?= $sort; ?>">Email</a>
                 <?= $sortField === 'email' ? '<i class="fa fa-fw fa-sort">' : ""; ?>
             </th>
             <th>
-                <a href="index.php?route=task/index&sortField=content&sort=<?= $sort; ?>">Контент</a>
+                <a href="<?= $currentLink ?>&sortField=content&sort=<?= $sort; ?>">Контент</a>
                 <?= $sortField === 'content' ? '<i class="fa fa-fw fa-sort">' : ""; ?>
             </th>
             <th>
-                <a href="index.php?route=task/index&sortField=status&sort=<?= $sort; ?>">Выполнено</a>
+                <a href="<?= $currentLink ?>&sortField=status&sort=<?= $sort; ?>">Выполнено</a>
                 <?= $sortField === 'status' ? '<i class="fa fa-fw fa-sort">' : ""; ?>
             </th>
             <?= $isLogin ? "<th>Редактировать</th>" : "" ?>
