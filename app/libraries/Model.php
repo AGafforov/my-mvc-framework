@@ -43,15 +43,17 @@ class Model
      * Selects items from table
      *
      * @param string $fields
+     * @param string $sort_field
+     * @param string $sort
      * @param int    $offset
      * @param int    $limit
      *
      * @return array
      */
-    public function select($fields = '*', $offset = 0, $limit = 3)
+    public function select($fields = '*', $sort_field = 'id', $sort = 'ASC', $offset = 0, $limit = 3)
     {
-        $query = "SELECT $fields FROM $this->tableName LIMIT $limit OFFSET " . $offset * $limit;
-
+        $offset = $offset * $limit;
+        $query  = "SELECT $fields FROM $this->tableName  ORDER BY $sort_field $sort LIMIT $limit OFFSET $offset";
         $result = $this->connection->query($query)->fetchAll();
 
         return $result;

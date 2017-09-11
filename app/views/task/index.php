@@ -3,7 +3,10 @@
 /** @var $prevPage mixed */
 /** @var $nextPage mixed */
 /** @var $currentPage integer */
+/** @var $sort string */
+/** @var $sortField string */
 
+$sort    = $sort === 'ASC' ? 'DESC' : 'ASC';
 $isLogin = \app\libraries\App::getSession()->get("isLogin");
 ?>
 
@@ -15,11 +18,26 @@ $isLogin = \app\libraries\App::getSession()->get("isLogin");
 <?php if (count($tasks)) : ?>
     <table class="table table-striped">
         <tr>
-            <th>ID</th>
-            <th>Имя</th>
-            <th>Email</th>
-            <th>Контент</th>
-            <th>Выполнено</th>
+            <th>
+                <a href="index.php?route=task/index&sortField=id&sort=<?= $sort ?>">ID</a>
+                <?= $sortField === 'id' ? '<i class="fa fa-fw fa-sort">' : ""; ?>
+            </th>
+            <th>
+                <a href="index.php?route=task/index&sortField=username&sort=<?= $sort; ?>">Имя</a>
+                <?= $sortField === 'username' ? '<i class="fa fa-fw fa-sort">' : ""; ?>
+            </th>
+            <th>
+                <a href="index.php?route=task/index&sortField=email&sort=<?= $sort; ?>">Email</a>
+                <?= $sortField === 'email' ? '<i class="fa fa-fw fa-sort">' : ""; ?>
+            </th>
+            <th>
+                <a href="index.php?route=task/index&sortField=content&sort=<?= $sort; ?>">Контент</a>
+                <?= $sortField === 'content' ? '<i class="fa fa-fw fa-sort">' : ""; ?>
+            </th>
+            <th>
+                <a href="index.php?route=task/index&sortField=status&sort=<?= $sort; ?>">Выполнено</a>
+                <?= $sortField === 'status' ? '<i class="fa fa-fw fa-sort">' : ""; ?>
+            </th>
             <?= $isLogin ? "<th>Редактировать</th>" : "" ?>
         </tr>
         <?php foreach ($tasks as $task) : ?>

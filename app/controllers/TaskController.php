@@ -18,10 +18,14 @@ class TaskController extends Controller
      */
     public function actionIndex()
     {
-        $model  = new Task();
+        $model = new Task();
+
+        $sort      = App::getRequest()->get('sort', 'ASC');
+        $sortField = App::getRequest()->get('sortField', 'id');
+
         $offset = App::getRequest()->get('page', 1);
 
-        $tasks      = $model->select('*', ($offset - 1));
+        $tasks      = $model->select('*', $sortField, $sort, ($offset - 1));
         $tasksCount = $model->count();
 
         $nextPage = (($offset + 1) <= ceil($tasksCount / 3)) ? $offset + 1 : '#';
@@ -29,6 +33,8 @@ class TaskController extends Controller
 
         return $this->render('index', [
             'tasks'       => $tasks,
+            'sort'        => $sort,
+            'sortField'   => $sortField,
             'prevPage'    => $prevPage,
             'nextPage'    => $nextPage,
             'currentPage' => $offset,
