@@ -57,6 +57,13 @@
                 </h4>
             </div>
             <div class="modal-body">
+                <div style="margin-bottom: 10px;">
+                    <img src="#"
+                         alt="Image"
+                         id="pr-image"
+                         style="width: 400px; display: block;margin-left: auto;margin-right: auto;"
+                         class="rounded mx-auto d-block"/>
+                </div>
                 <table id="classTable" class="table table-bordered">
                     <thead>
                     <tr>
@@ -100,6 +107,32 @@
             console.log(email, content, username);
         }
 
+        /**
+         * Reads uploaded image
+         * @param input
+         */
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#pr-image').attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        /**
+         * Handle for click on preview button
+         */
         $("#preview-btn").on('click', onPreview);
+
+        /**
+         * Handle for upload image
+         */
+        $("#image").change(function () {
+            readURL(this);
+        });
     });
 </script>
