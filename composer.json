@@ -11,6 +11,8 @@
       "Fogersp\\SuperProject\\": "app"
     }
   },
-  "require": {},
+  "require": {
+    "tamtamchik/simple-flash": "^1.2"
+  },
   "require-dev": {}
 }

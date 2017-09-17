@@ -52,7 +52,6 @@ $currentLink = "index.php?route=task/index&page=$currentPage";
                 <td><?= $task['content'] ?></td>
                 <td><?= $task['status'] == 1 ? 'да' : 'нет'; ?></td>
                 <td>
-
                     <?php if ($task['image'] ?? null) : ?>
                         <a href="#"
                            data-toggle="modal"

@@ -5,6 +5,7 @@ use app\models\Task;
 use app\libraries\App;
 use app\helpers\ImageHelper;
 use app\libraries\Controller;
+use app\widgets\Alert;
 
 /**
  * Class TaskController
@@ -51,7 +52,11 @@ class TaskController extends Controller
             $post['image'] = ImageHelper::uploadImage($_FILES['image']);
 
             $model = new Task();
-            $model->insert($post);
+            if ($model->insert($post)) {
+                Alert::add(Alert::TYPE_SUCCESS, "Новая задача успешно добавлена.");
+            } else {
+                Alert::add(Alert::TYPE_DANGER, "Не удалось добавить новую задачу.");
+            }
 
             return App::getRouter()->to('task');
         }
@@ -69,10 +74,11 @@ class TaskController extends Controller
             $post['status'] = ($post['status'] ?? '') === "on" ? 1 : 0;
 
             $model = new Task();
-            $model->update(
-                $post,
-                ['id' => App::getRequest()->post('id')]
-            );
+            if ($model->update($post, ['id' => App::getRequest()->post('id')])) {
+                Alert::add(Alert::TYPE_SUCCESS, "Задача успешно обновлена.");
+            } else {
+                Alert::add(Alert::TYPE_DANGER, "Не удалось отредактировать запись.");
+            }
 
             return App::getRouter()->to('task');
         }

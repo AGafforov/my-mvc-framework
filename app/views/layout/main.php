@@ -53,6 +53,7 @@ $isLogin = \app\libraries\App::getSession()->get("isLogin");
 </nav>
 
 <div class="container-fluid">
+    <?= \app\widgets\Alert::widget(); ?>
     <?= $content; ?>
 </div>
 
