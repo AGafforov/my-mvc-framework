@@ -39,6 +39,9 @@ $currentLink = "index.php?route=task/index&page=$currentPage";
                 <a href="<?= $currentLink ?>&sortField=status&sort=<?= $sort; ?>">Выполнено</a>
                 <?= $sortField === 'status' ? '<i class="fa fa-fw fa-sort">' : ""; ?>
             </th>
+            <th>
+                <a href="#">Картинка</a>
+            </th>
             <?= $isLogin ? "<th>Редактировать</th>" : "" ?>
         </tr>
         <?php foreach ($tasks as $task) : ?>
@@ -48,6 +51,31 @@ $currentLink = "index.php?route=task/index&page=$currentPage";
                 <td><?= $task['email'] ?></td>
                 <td><?= $task['content'] ?></td>
                 <td><?= $task['status'] == 1 ? 'да' : 'нет'; ?></td>
+                <td>
+
+                    <?php if ($task['image'] ?? null) : ?>
+                        <a href="#"
+                           data-toggle="modal"
+                           data-target="#pic-<?= $task['id'] ?>">
+                            Показать картинку
+                        </a>
+
+                        <div id="pic-<?= $task['id'] ?>"
+                             class="modal fade"
+                             tabindex="-1"
+                             role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-body" style="text-align: center;">
+                                        <img src="<?= $task['image'] ?>" class="img-fluid">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php else: ?>
+                        <p>нет</p>
+                    <?php endif; ?>
+                </td>
                 <?= $isLogin ? "<th><a href='index.php?route=task/edit&id=" . $task['id'] . "' >Изменить</a></th>" : "" ?>
             </tr>
         <?php endforeach; ?>

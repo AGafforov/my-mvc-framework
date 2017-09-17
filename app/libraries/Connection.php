@@ -38,7 +38,7 @@ class Connection
             $username = $dbConfig['username'];
             $password = $dbConfig['password'];
 
-            $this->connection          = new \PDO($dsn, $username, $password);
+            $this->connection  = new \PDO($dsn, $username, $password);
             $this->isConnected = true;
         } catch (\Exception $ex) {
             echo $ex->getMessage();
